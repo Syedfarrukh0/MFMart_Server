@@ -147,7 +147,7 @@ export const updateOrderStatus = async (req, res) => {
     try {
         const { orderId } = req.params;
         const { status, deliveryPersonLocation } = req.body;
-        const userId = req.user;
+        const userId = req.user.userId;
         const deliveryPerson = await DeliveryPartner.findById(userId);
         if (!deliveryPerson) {
             return res.status(404).send({ message: 'Delivery person not found' });
@@ -182,10 +182,10 @@ export const getOrders = async (req, res) => {
             query.customer = customerId;
         } 
         if (deliveryPartnerId) {
-            query.deliveryPartner = status;
+            query.deliveryPartner = deliveryPartnerId;
             query.branch = branchId;
         }
-        const orders = await Order.find(query).populate('Customer branch items.item deliveryPartner');
+        const orders = await Order.find(query).populate('customer branch items.item deliveryPartner');
         return res.status(200).send({ message: 'Orders fetched successfully', orders })
     } catch (error) {
         return res.status(500).send({ message: 'Faild to get orders', error})
