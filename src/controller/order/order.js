@@ -19,16 +19,16 @@ export const createOrder = async (req, res) => {
         }
 
         // Automatically select a delivery partner (you can add your own logic here)
-        const deliveryPartner = await DeliveryPartner.findOne(); // Here, you can add filters or logic to assign a specific delivery partner
-        console.log(deliveryPartner, '3');
+        // const deliveryPartner = await DeliveryPartner.findOne(); // Here, you can add filters or logic to assign a specific delivery partner
+        // console.log(deliveryPartner, '3');
 
-        if (!deliveryPartner) {
-            return res.status(404).send({ message: 'No available delivery partner found' });
-        }
+        // if (!deliveryPartner) {
+        //     return res.status(404).send({ message: 'No available delivery partner found' });
+        // }
 
         const newOrder = new Order({
             customer: userId,
-            deliveryPartner: deliveryPartner._id, // Automatically assigning deliveryPartner
+            // deliveryPartner: deliveryPartner._id, // Automatically assigning deliveryPartner
             items: items.map((item) => ({
                 id: item.id,
                 item: item.item,
