@@ -17,6 +17,12 @@ const start = async () => {
         pingTimeout: 5000,
         transports: ["websocket"]
     })
+
+    // Simple route to return a message in the browser
+    app.get('/', async (request, reply) => {
+        return { message: "Server is running on port " + PORT };
+    });
+    
     await registerRoutes(app);
     await buildAdminRouter(app);
     app.listen({ port: PORT, host: '0.0.0.0' }, (err, addr) => {
