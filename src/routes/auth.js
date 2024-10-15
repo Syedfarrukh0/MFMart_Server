@@ -1,7 +1,9 @@
 import { fetchUser, loginCustomer, loginDeliveryPartner, refreshToken } from "../controller/auth/auth.js"
 import { updateUser } from "../controller/tracking/user.js";
 import { verifyToken } from "../middleware/auth.js"
+import { createRequire } from 'module';
 
+const require = createRequire(import.meta.url);
 
 export const authRoutes = async (fastify, options) => {
     fastify.post ('/customer/login', loginCustomer);
